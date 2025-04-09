@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:yum_gott_app/core/theme/app_theme.dart';
 import 'package:yum_gott_app/features/feed/presentation/controllers/feed_controller.dart';
 import 'package:yum_gott_app/features/feed/presentation/widgets/video_player_item.dart';
+import 'package:yum_gott_app/routes.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -132,8 +133,8 @@ class _FeedScreenState extends State<FeedScreen> {
                 // Get.toNamed(AppRoutes.search);
                 break;
               case 2:
-                // Navigate to add content screen
-                // Get.toNamed(AppRoutes.addContent);
+                // Navigate to camera screen
+                Get.toNamed(AppRoutes.camera);
                 break;
               case 3:
                 // Navigate to cart screen
