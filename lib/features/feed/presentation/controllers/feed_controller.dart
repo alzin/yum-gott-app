@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:yum_gott_app/features/feed/domain/models/video_model.dart';
@@ -50,9 +51,17 @@ class FeedController extends GetxController {
       return;
     }
     
-    // In a real app, this would use a network URL
-    // For now, we're using asset videos
-    final controller = VideoPlayerController.asset(video.videoUrl);
+    // Create the appropriate controller based on the URL type
+    VideoPlayerController controller;
+    
+    // Check if the video URL is a file path (starts with /)
+    if (video.videoUrl.startsWith('/')) {
+      controller = VideoPlayerController.file(File(video.videoUrl));
+    } else {
+      // Otherwise, assume it's an asset
+      controller = VideoPlayerController.asset(video.videoUrl);
+    }
+    
     videoControllers[video.id] = controller;
     
     await controller.initialize();
