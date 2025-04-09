@@ -42,7 +42,6 @@ class _RegisterScreenState extends State<RegisterScreen> with SingleTickerProvid
   void _register() {
     if (_formKey.currentState!.validate()) {
       // TODO: Implement registration
-      Get.offAllNamed(AppRoutes.home);
     }
   }
 
