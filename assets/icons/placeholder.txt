@@ -1,0 +1,4 @@
+Place your icon assets here:
+
+1. google.png - Google icon for social login
+2. facebook.png - Facebook icon for social login

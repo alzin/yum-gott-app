@@ -1,0 +1,43 @@
+# Placeholder Images for Yum Gott App
+
+## Restaurant Images
+Place the following restaurant images in the assets/images directory:
+
+1. restaurant1.jpg - Burger King restaurant image
+2. restaurant2.jpg - Pizza Hut restaurant image
+3. restaurant3.jpg - Sushi Palace restaurant image
+4. restaurant4.jpg - Taco Bell restaurant image
+5. restaurant5.jpg - Subway restaurant image
+
+## Product Images
+Place the following product images in the assets/images directory:
+
+1. product1.jpg - Double Cheeseburger image
+2. product2.jpg - Pepperoni Pizza image
+3. product3.jpg - California Roll image
+4. product4.jpg - Chicken Tacos image
+5. product5.jpg - Italian BMT image
+
+## Category Images
+Place the following category images in the assets/images directory:
+
+1. category_burger.jpg - Burger category image
+2. category_pizza.jpg - Pizza category image
+3. category_sushi.jpg - Sushi category image
+4. category_tacos.jpg - Tacos category image
+5. category_sandwich.jpg - Sandwich category image
+6. category_dessert.jpg - Dessert category image
+7. category_drinks.jpg - Drinks category image
+
+## Category Icons
+Place the following category icons in the assets/icons directory:
+
+1. burger_icon.png - Burger category icon
+2. pizza_icon.png - Pizza category icon
+3. sushi_icon.png - Sushi category icon
+4. tacos_icon.png - Tacos category icon
+5. sandwich_icon.png - Sandwich category icon
+6. dessert_icon.png - Dessert category icon
+7. drinks_icon.png - Drinks category icon
+
+You can use any free stock images or icons for these placeholders.
