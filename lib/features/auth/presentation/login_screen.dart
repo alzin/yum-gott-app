@@ -35,7 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
         Get.toNamed(AppRoutes.otpVerification, arguments: _phoneController.text);
       } else {
         // TODO: Implement email login
-        Get.offAllNamed(AppRoutes.home);
       }
     }
   }

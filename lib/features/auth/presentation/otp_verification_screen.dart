@@ -65,7 +65,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   void _verifyOtp() {
     if (_otpController.text.length == 4) {
       // TODO: Implement OTP verification
-      Get.offAllNamed(AppRoutes.home);
     } else {
       Get.snackbar(
         'Error',
