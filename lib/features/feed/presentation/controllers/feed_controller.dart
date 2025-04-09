@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:yum_gott_app/features/feed/domain/models/video_model.dart';
@@ -50,9 +51,17 @@ class FeedController extends GetxController {
       return;
     }
     
-    // In a real app, this would use a network URL
-    // For now, we're using asset videos
-    final controller = VideoPlayerController.asset(video.videoUrl);
+    // Create the appropriate controller based on the URL type
+    VideoPlayerController controller;
+    
+    // Check if the video URL is a file path (starts with /)
+    if (video.videoUrl.startsWith('/')) {
+      controller = VideoPlayerController.file(File(video.videoUrl));
+    } else {
+      // Otherwise, assume it's an asset
+      controller = VideoPlayerController.asset(video.videoUrl);
+    }
+    
     videoControllers[video.id] = controller;
     
     await controller.initialize();
@@ -177,6 +186,7 @@ class FeedController extends GetxController {
       controller.dispose();
       videoControllers.remove(videoId);
     }
+    
   }
   
   void disposeAllControllers() {
@@ -184,5 +194,39 @@ class FeedController extends GetxController {
       controller?.dispose();
     }
     videoControllers.clear();
+  }
+  
+  // Add a new video to the feed
+  void addVideo(String videoPath, String thumbnailPath) {
+    // Create a new video model
+    final newVideo = VideoModel(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      videoUrl: videoPath,
+      thumbnailUrl: thumbnailPath,
+      restaurantName: 'My Restaurant',
+      restaurantId: '1',
+      restaurantLogoUrl: 'assets/images/restaurant_logo1.png',
+      foodName: 'My Food',
+      foodCategory: 'Homemade',
+      description: 'Video recorded with Yum Gott app',
+      likes: 0,
+      comments: 0,
+      shares: 0,
+      rating: 5.0,
+      distance: '0 km',
+      userName: 'Me',
+      userProfileUrl: 'assets/images/user_profile1.jpg',
+    );
+    
+    // Add the video to the beginning of the list
+    final updatedVideos = <VideoModel>[newVideo];
+    updatedVideos.addAll(videos);
+    videos.value = updatedVideos;
+    
+    // Initialize the controller for the new video
+    initializeController(0);
+    
+    // Update current index to show the new video
+    currentIndex.value = 0;
   }
 }
