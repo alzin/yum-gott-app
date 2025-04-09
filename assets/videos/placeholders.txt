@@ -1,0 +1,13 @@
+# Placeholder Videos for Yum Gott App
+
+Place the following video files in this directory:
+
+1. video1.mp4 - Burger video from Observatory Bar & Grill
+2. video2.mp4 - Pizza video from Pizza Palace
+3. video3.mp4 - Sushi video from Sushi World
+4. video4.mp4 - Tacos video from Taco Heaven
+5. video5.mp4 - Dessert video from Sweet Treats
+
+You can use any free stock videos for these placeholders. The videos should be short (10-15 seconds) and show the food items in an appealing way.
+
+For testing purposes, you can download sample food videos from websites like Pexels, Pixabay, or Unsplash that offer free stock videos.

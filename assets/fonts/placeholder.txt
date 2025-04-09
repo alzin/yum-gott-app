@@ -1,0 +1,22 @@
+Place your font files here:
+
+1. Vazirmatn-Regular.ttf
+2. Vazirmatn-Medium.ttf
+3. Vazirmatn-SemiBold.ttf
+4. Vazirmatn-Bold.ttf
+
+5. Poppins-Regular.ttf
+6. Poppins-Medium.ttf
+7. Poppins-SemiBold.ttf
+8. Poppins-Bold.ttf
+
+9. Kanit-Regular.ttf
+10. Kanit-Medium.ttf
+11. OpenSans-Regular.ttf
+12. OpenSans-Bold.ttf
+
+You can download these fonts from Google Fonts:
+- Vazirmatn: https://fonts.google.com/specimen/Vazirmatn
+- Poppins: https://fonts.google.com/specimen/Poppins
+- Kanit: https://fonts.google.com/specimen/Kanit
+- Open Sans: https://fonts.google.com/specimen/Open+Sans

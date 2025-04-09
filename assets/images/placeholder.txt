@@ -1,0 +1,7 @@
+Place your image assets here:
+
+1. logo.png - App logo
+2. background.jpg - Background image for auth screens
+3. onboarding1.jpg - First onboarding screen background
+4. onboarding2.jpg - Second onboarding screen background
+5. onboarding3.jpg - Third onboarding screen background
