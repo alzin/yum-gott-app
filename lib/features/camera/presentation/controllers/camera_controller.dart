@@ -255,9 +255,10 @@ class CustomCameraController extends GetxController {
       final feedController = Get.find<FeedController>();
       
       // Add video to feed
-      // This is a placeholder implementation
-      // In a real app, you would upload the video to a server
-      // and then add it to the feed
+      feedController.addVideo(
+        recordedVideo.value!.filePath,
+        recordedVideo.value!.thumbnailPath,
+      );
       
       // Navigate back to feed
       Get.offNamed(AppRoutes.feed);
