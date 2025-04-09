@@ -3,6 +3,7 @@ import 'package:yum_gott_app/features/auth/presentation/login_screen.dart';
 import 'package:yum_gott_app/features/auth/presentation/otp_verification_screen.dart';
 import 'package:yum_gott_app/features/auth/presentation/register_screen.dart';
 import 'package:yum_gott_app/features/auth/presentation/welcome_screen.dart';
+import 'package:yum_gott_app/features/camera/presentation/camera_screen.dart';
 import 'package:yum_gott_app/features/feed/presentation/feed_screen.dart';
 import 'package:yum_gott_app/features/onboarding/presentation/onboarding_screen.dart';
 
@@ -14,6 +15,7 @@ class AppRoutes {
   static const String register = '/register';
   static const String otpVerification = '/otp-verification';
   static const String feed = '/feed';
+  static const String camera = '/camera';
 
   // Get pages for GetX navigation
   static List<GetPage> pages = [
@@ -45,6 +47,11 @@ class AppRoutes {
     GetPage(
       name: feed,
       page: () => const FeedScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: camera,
+      page: () => const CameraScreen(),
       transition: Transition.rightToLeft,
     )
   ];

@@ -49,6 +49,11 @@ dependencies:
   # Video player
   video_player: ^2.8.2
   cached_network_image: ^3.3.1
+  
+  # Camera
+  camera: ^0.10.5+9
+  path_provider: ^2.1.2
+  permission_handler: ^11.3.0
 
 dev_dependencies:
   flutter_test:
