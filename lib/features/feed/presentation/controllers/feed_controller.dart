@@ -205,7 +205,7 @@ class FeedController extends GetxController {
       thumbnailUrl: thumbnailPath,
       restaurantName: 'My Restaurant',
       restaurantId: '1',
-      restaurantLogoUrl: 'assets/images/restaurant_logo1.png',
+      restaurantLogoUrl: 'assets/images/pizza.png',
       foodName: 'My Food',
       foodCategory: 'Homemade',
       description: 'Video recorded with Yum Gott app',
@@ -215,7 +215,7 @@ class FeedController extends GetxController {
       rating: 5.0,
       distance: '0 km',
       userName: 'Me',
-      userProfileUrl: 'assets/images/user_profile1.jpg',
+      userProfileUrl: 'assets/images/boy.png',
     );
     
     // Add the video to the beginning of the list
