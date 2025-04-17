@@ -12,7 +12,7 @@ class FeedScreen extends StatefulWidget {
   State<FeedScreen> createState() => _FeedScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class _FeedScreenState extends State<FeedScreen> with WidgetsBindingObserver {
   final PageController _pageController = PageController();
   late FeedController _feedController;
 
@@ -20,12 +20,32 @@ class _FeedScreenState extends State<FeedScreen> {
   void initState() {
     super.initState();
     _feedController = Get.put(FeedController());
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _pageController.dispose();
     super.dispose();
+  }
+  
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Pause videos when app goes to background
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
+      final currentVideo = _feedController.videos[_feedController.currentIndex.value];
+      final controller = _feedController.videoControllers[currentVideo.id];
+      controller?.pause();
+    }
+    
+    // When app is resumed, play current video if it was playing before
+    if (state == AppLifecycleState.resumed) {
+      final currentVideo = _feedController.videos[_feedController.currentIndex.value];
+      final controller = _feedController.videoControllers[currentVideo.id];
+      controller?.play();
+    }
   }
 
   @override

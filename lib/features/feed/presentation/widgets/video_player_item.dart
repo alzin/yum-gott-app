@@ -39,20 +39,35 @@ class VideoPlayerItem extends StatelessWidget {
               child: Container(
                 color: Colors.black,
                 child: isInitialized
-                    ? VideoPlayer(videoController!)
-                    : Image.asset(
-                        video.thumbnailUrl,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.black,
-                            child: const Center(
-                              child: CircularProgressIndicator(
-                                color: AppTheme.primaryColor,
-                              ),
+                    ? AspectRatio(
+                        aspectRatio: videoController!.value.aspectRatio,
+                        child: VideoPlayer(videoController!),
+                      )
+                    : Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.asset(
+                            video.thumbnailUrl,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.black,
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.image_not_supported,
+                                    color: Colors.white54,
+                                    size: 48,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          const Center(
+                            child: CircularProgressIndicator(
+                              color: AppTheme.primaryColor,
                             ),
-                          );
-                        },
+                          ),
+                        ],
                       ),
               ),
             ),

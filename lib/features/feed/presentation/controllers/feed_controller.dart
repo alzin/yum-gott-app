@@ -56,23 +56,42 @@ class FeedController extends GetxController {
     
     // Check if the video URL is a file path (starts with /)
     if (video.videoUrl.startsWith('/')) {
-      controller = VideoPlayerController.file(File(video.videoUrl));
+      controller = VideoPlayerController.file(
+        File(video.videoUrl),
+        videoPlayerOptions: VideoPlayerOptions(
+          mixWithOthers: false,
+          allowBackgroundPlayback: false,
+        ),
+      );
     } else {
       // Otherwise, assume it's an asset
-      controller = VideoPlayerController.asset(video.videoUrl);
+      controller = VideoPlayerController.asset(
+        video.videoUrl,
+        videoPlayerOptions: VideoPlayerOptions(
+          mixWithOthers: false,
+          allowBackgroundPlayback: false,
+        ),
+      );
     }
     
     videoControllers[video.id] = controller;
     
-    await controller.initialize();
-    controller.setLooping(true);
-    
-    // Auto-play the current video
-    if (index == currentIndex.value) {
-      controller.play();
+    try {
+      await controller.initialize();
+      controller.setLooping(true);
+      
+      // Auto-play the current video
+      if (index == currentIndex.value) {
+        controller.play();
+      }
+      
+      update(); // Notify listeners
+    } catch (e) {
+      print("Error initializing video controller: $e");
+      // If initialization fails, remove the controller to prevent memory leaks
+      videoControllers.remove(video.id);
+      update();
     }
-    
-    update(); // Notify listeners
   }
   
   void onPageChanged(int index) {
@@ -84,7 +103,7 @@ class FeedController extends GetxController {
     // Update current index
     currentIndex.value = index;
     
-    // Initialize the next controller if needed
+    // Initialize the current controller if needed
     initializeController(index);
     
     // Play the current video
@@ -95,6 +114,34 @@ class FeedController extends GetxController {
     // Preload the next video
     if (index < videos.length - 1) {
       initializeController(index + 1);
+    }
+    
+    // Release memory for videos that are far from current view
+    _cleanupUnusedControllers(index);
+  }
+  
+  // New method to clean up controllers that are far from the current view
+  void _cleanupUnusedControllers(int currentIndex) {
+    // Keep only controllers for current, previous, and next videos
+    final keepIndices = <int>[
+      currentIndex - 1,
+      currentIndex,
+      currentIndex + 1,
+    ];
+    
+    final videoIdsToKeep = keepIndices
+        .where((i) => i >= 0 && i < videos.length)
+        .map((i) => videos[i].id)
+        .toSet();
+    
+    // Find controllers to dispose
+    final idsToRemove = videoControllers.keys
+        .where((id) => !videoIdsToKeep.contains(id))
+        .toList();
+    
+    // Dispose and remove controllers
+    for (final id in idsToRemove) {
+      disposeController(id);
     }
   }
   
@@ -205,7 +252,7 @@ class FeedController extends GetxController {
       thumbnailUrl: thumbnailPath,
       restaurantName: 'My Restaurant',
       restaurantId: '1',
-      restaurantLogoUrl: 'assets/images/restaurant_logo1.png',
+      restaurantLogoUrl: 'assets/images/pizza.png',
       foodName: 'My Food',
       foodCategory: 'Homemade',
       description: 'Video recorded with Yum Gott app',
@@ -215,7 +262,7 @@ class FeedController extends GetxController {
       rating: 5.0,
       distance: '0 km',
       userName: 'Me',
-      userProfileUrl: 'assets/images/user_profile1.jpg',
+      userProfileUrl: 'assets/images/boy.png',
     );
     
     // Add the video to the beginning of the list
