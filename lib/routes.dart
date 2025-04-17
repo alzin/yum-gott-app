@@ -4,6 +4,7 @@ import 'package:yum_gott_app/features/auth/presentation/otp_verification_screen.
 import 'package:yum_gott_app/features/auth/presentation/register_screen.dart';
 import 'package:yum_gott_app/features/auth/presentation/welcome_screen.dart';
 import 'package:yum_gott_app/features/camera/presentation/camera_screen.dart';
+import 'package:yum_gott_app/features/camera/presentation/flutter_camera_screen.dart';
 import 'package:yum_gott_app/features/feed/presentation/feed_screen.dart';
 import 'package:yum_gott_app/features/onboarding/presentation/onboarding_screen.dart';
 
@@ -51,7 +52,7 @@ class AppRoutes {
     ),
     GetPage(
       name: camera,
-      page: () => const CameraScreen(),
+      page: () => const FlutterCameraScreen(),
       transition: Transition.rightToLeft,
     )
   ];
