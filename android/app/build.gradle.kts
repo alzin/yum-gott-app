@@ -35,7 +35,23 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+            
+            // Enable R8 optimization for release builds
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        
+        debug {
+            // Enable memory optimization even in debug mode
+            isMinifyEnabled = false
+            applicationIdSuffix = ".debug"
+        }
+    }
+    
+    // Configure dex options for better memory management
+    dexOptions {
+        javaMaxHeapSize = "4g"
+        preDexLibraries = true
     }
 }
 
