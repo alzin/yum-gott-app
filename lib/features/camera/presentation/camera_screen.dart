@@ -6,6 +6,7 @@ import 'package:yum_gott_app/features/camera/presentation/controllers/camera_con
 import 'package:yum_gott_app/features/camera/presentation/widgets/usage_policy_dialog.dart';
 import 'package:yum_gott_app/features/camera/presentation/widgets/camera_controls.dart';
 import 'package:yum_gott_app/features/camera/presentation/widgets/video_preview.dart';
+import 'package:yum_gott_app/features/camera/presentation/widgets/restaurant_selection_screen.dart';
 
 class CameraScreen extends StatelessWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -22,6 +23,14 @@ class CameraScreen extends StatelessWidget {
         if (controller.showUsagePolicy.value) {
           return UsagePolicyDialog(
             onAccept: controller.acceptUsagePolicy,
+          );
+        }
+        
+        // Show restaurant selection after accepting usage policy
+        if (controller.showRestaurantSelection.value) {
+          return RestaurantSelectionScreen(
+            restaurants: controller.restaurants,
+            onRestaurantSelected: controller.selectRestaurant,
           );
         }
         
