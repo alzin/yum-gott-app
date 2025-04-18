@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yum_gott_app/features/camera/domain/models/recorded_video.dart';
 import 'package:yum_gott_app/features/camera/domain/models/restaurant.dart';
+import 'package:yum_gott_app/features/camera/domain/models/product.dart';
 import 'package:yum_gott_app/features/feed/presentation/controllers/feed_controller.dart';
 import 'package:yum_gott_app/routes.dart';
 
@@ -24,6 +25,7 @@ class CustomCameraController extends GetxController {
   // Screen state
   final RxBool showUsagePolicy = true.obs;
   final RxBool showRestaurantSelection = false.obs;
+  final RxBool showProductSelection = false.obs;
   
   // Restaurant selection
   final RxInt selectedRestaurantId = 1.obs;
@@ -49,6 +51,11 @@ class CustomCameraController extends GetxController {
   
   // Selected restaurant
   final Rx<Restaurant?> selectedRestaurant = Rx<Restaurant?>(null);
+  
+  // Product selection
+  final RxInt selectedProductId = 1.obs;
+  final RxList<Product> products = <Product>[].obs;
+  final Rx<Product?> selectedProduct = Rx<Product?>(null);
   
   @override
   void onInit() {
@@ -311,5 +318,68 @@ class CustomCameraController extends GetxController {
   void selectRestaurant(Restaurant restaurant) {
     selectedRestaurant.value = restaurant;
     showRestaurantSelection.value = false;
+    
+    // Load products for the selected restaurant
+    loadProductsForRestaurant(restaurant.id);
+    
+    // Show product selection screen
+    showProductSelection.value = true;
+  }
+  
+  // Load products for a restaurant
+  void loadProductsForRestaurant(int restaurantId) {
+    // In a real app, this would fetch products from an API
+    // For now, we'll use mock data
+    products.value = [
+      Product(
+        id: 1,
+        name: "Chicken Biryani",
+        restaurant: "KFC REST",
+        timestamp: "2024/08/10 12:08AM",
+        image: "assets/images/pizza.png",
+        selected: true,
+      ),
+      Product(
+        id: 2,
+        name: "Pizza Margarita",
+        restaurant: "KFC REST",
+        timestamp: "2024/08/10 12:08AM",
+        image: "assets/images/pizza.png",
+        selected: false,
+      ),
+      Product(
+        id: 3,
+        name: "Orange Juice",
+        restaurant: "KFC REST",
+        timestamp: "2024/08/10 12:08AM",
+        image: "assets/images/pizza.png",
+        selected: false,
+      ),
+      Product(
+        id: 4,
+        name: "Chicken Biryani",
+        restaurant: "KFC REST",
+        timestamp: "2024/08/10 12:08AM",
+        image: "assets/images/pizza.png",
+        selected: false,
+      ),
+      Product(
+        id: 5,
+        name: "Chicken Biryani",
+        restaurant: "KFC REST",
+        timestamp: "2024/08/10 12:08AM",
+        image: "assets/images/pizza.png",
+        selected: false,
+      ),
+    ];
+    
+    // Set the first product as selected by default
+    selectedProductId.value = products[0].id;
+  }
+  
+  // Select product
+  void selectProduct(Product product) {
+    selectedProduct.value = product;
+    showProductSelection.value = false;
   }
 }

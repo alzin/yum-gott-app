@@ -7,6 +7,7 @@ import 'package:yum_gott_app/features/camera/presentation/widgets/usage_policy_d
 import 'package:yum_gott_app/features/camera/presentation/widgets/camera_controls.dart';
 import 'package:yum_gott_app/features/camera/presentation/widgets/video_preview.dart';
 import 'package:yum_gott_app/features/camera/presentation/widgets/restaurant_selection_screen.dart';
+import 'package:yum_gott_app/features/camera/presentation/widgets/product_selection_screen.dart';
 
 class CameraScreen extends StatelessWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -31,6 +32,14 @@ class CameraScreen extends StatelessWidget {
           return RestaurantSelectionScreen(
             restaurants: controller.restaurants,
             onRestaurantSelected: controller.selectRestaurant,
+          );
+        }
+        
+        // Show product selection after selecting a restaurant
+        if (controller.showProductSelection.value) {
+          return ProductSelectionScreen(
+            products: controller.products,
+            onProductSelected: controller.selectProduct,
           );
         }
         
