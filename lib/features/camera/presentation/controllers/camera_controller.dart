@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yum_gott_app/features/camera/domain/models/recorded_video.dart';
+import 'package:yum_gott_app/features/camera/domain/models/restaurant.dart';
 import 'package:yum_gott_app/features/feed/presentation/controllers/feed_controller.dart';
 import 'package:yum_gott_app/routes.dart';
 
@@ -20,11 +21,34 @@ class CustomCameraController extends GetxController {
   final RxBool isFrontCamera = false.obs;
   final RxBool isFlashOn = false.obs;
   
-  // Usage policy
+  // Screen state
   final RxBool showUsagePolicy = true.obs;
+  final RxBool showRestaurantSelection = false.obs;
+  
+  // Restaurant selection
+  final RxInt selectedRestaurantId = 1.obs;
+  final RxList<Restaurant> restaurants = <Restaurant>[
+    Restaurant(
+      id: 1,
+      name: "Observatory Bar & Grill",
+      description: "Thick handmade udon noodles in a rich miso broth, garnished with tofu....",
+      location: "Sweden",
+      image: "assets/images/pizza.png",
+    ),
+    Restaurant(
+      id: 2,
+      name: "Tasty Bites",
+      description: "Thick handmade udon noodles in a rich miso broth, garnished with tofu....",
+      location: "Sweden",
+      image: "assets/images/pizza.png",
+    ),
+  ].obs;
   
   // Recorded video
   final Rx<RecordedVideo?> recordedVideo = Rx<RecordedVideo?>(null);
+  
+  // Selected restaurant
+  final Rx<Restaurant?> selectedRestaurant = Rx<Restaurant?>(null);
   
   @override
   void onInit() {
@@ -280,5 +304,12 @@ class CustomCameraController extends GetxController {
   // Accept usage policy
   void acceptUsagePolicy() {
     showUsagePolicy.value = false;
+    showRestaurantSelection.value = true;
+  }
+  
+  // Select restaurant
+  void selectRestaurant(Restaurant restaurant) {
+    selectedRestaurant.value = restaurant;
+    showRestaurantSelection.value = false;
   }
 }
